@@ -52,7 +52,7 @@ require_once('database/dbconnection.php');
                             data-id="<?php echo $employee_id;?>" 
                             data-first_name="<?php echo $first_name;?>" 
                             data-last_name="<?php echo $last_name;?>" 
-                            data-email="<?php echo $email;?>" 
+                            data-email="<?php echo $email;?>  " 
                             class="btn btn-warning btn-sm">EDIT</a>
                             <a href="#" id="btnDelete" data-id="<?php echo $employee_id;?>" class="btn btn-danger btn-sm">DELETE</a>
                         </td>
@@ -90,7 +90,6 @@ require_once('database/dbconnection.php');
         
         <label for="txtEmail">Enter email:</label>
         <input type="email"  id="txtEmail" class="form-control">
-
 
       </div>
       <!-- Modal footer -->

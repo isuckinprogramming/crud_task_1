@@ -1,12 +1,12 @@
 ﻿**********************
 Windows PowerShell transcript start
-Start time: 20240327235353
+Start time: 20240329093646
 Username: DESKTOP-G9QG5I0\Borgs
 RunAs User: DESKTOP-G9QG5I0\Borgs
 Configuration Name: 
 Machine: DESKTOP-G9QG5I0 (Microsoft Windows NT 10.0.19045.0)
 Host Application: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -noexit -command try { . "c:\Users\Borgs\AppData\Local\Programs\Microsoft VS Code\resources\app\out\vs\workbench\contrib\terminal\browser\media\shellIntegration.ps1" } catch {}
-Process ID: 10488
+Process ID: 10500
 PSVersion: 5.1.19041.4170
 PSEdition: Desktop
 PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.19041.4170
@@ -17,6 +17,4 @@ PSRemotingProtocolVersion: 2.3
 SerializationVersion: 1.1.0.1
 **********************
 Transcript started, output file is git_commands_logs.txt
-]633;E;cd step* |  Start-Transcript -Path "git_commands_logs.txt" ;3f1ccbed-3319-4b8e-b7f4-5fa8f4c171c2]633;D;0]633;A]633;P;Cwd=C:\x5cxampp\x5chtdocs\x5cit26l\x5clim\x5ccrud_task_1\x5cstep by step implementationPS C:\xampp\htdocs\it26l\lim\crud_task_1\step by step implementation> ]633;B
-PS>cd ../
-]633;E;cd ../;3f1ccbed-3319-4b8e-b7f4-5fa8f4c171c2]633;D;0]633;A]633;P;Cwd=C:\x5cxampp\x5chtdocs\x5cit26l\x5clim\x5ccrud_task_1PS C:\xampp\htdocs\it26l\lim\crud_task_1> ]633;B
+]633;E;Start-Transcript -Path "git_commands_logs.txt" ;3f1ccbed-3319-4b8e-b7f4-5fa8f4c171c2]633;D;0]633;A]633;P;Cwd=C:\x5cxampp\x5chtdocs\x5cit26l\x5clim\x5ccrud_task_1PS C:\xampp\htdocs\it26l\lim\crud_task_1> ]633;B
