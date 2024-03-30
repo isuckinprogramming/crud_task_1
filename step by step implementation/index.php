@@ -55,190 +55,192 @@
                 </a>
               </td>
             </tr>
+
+            <!-- SAMPLE -->
+            <!-- (tr>td{ID Data $$}+td{Name Data $$}+td{Email Data $$}+td>a[href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm"]{EDIT}+a[class="btn btn-danger btn-sm" href="#" id="btnDelete" data-id="to be filled"]{DELETE})*10 -->
+            <tr>
+              <td>ID Data 01</td>
+              <td>Name Data 01</td>
+              <td>Email Data 01</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 02</td>
+              <td>Name Data 02</td>
+              <td>Email Data 02</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 03</td>
+              <td>Name Data 03</td>
+              <td>Email Data 03</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 04</td>
+              <td>Name Data 04</td>
+              <td>Email Data 04</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 05</td>
+              <td>Name Data 05</td>
+              <td>Email Data 05</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 06</td>
+              <td>Name Data 06</td>
+              <td>Email Data 06</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 07</td>
+              <td>Name Data 07</td>
+              <td>Email Data 07</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 08</td>
+              <td>Name Data 08</td>
+              <td>Email Data 08</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 09</td>
+              <td>Name Data 09</td>
+              <td>Email Data 09</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 10</td>
+              <td>Name Data 10</td>
+              <td>Email Data 10</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 11</td>
+              <td>Name Data 11</td>
+              <td>Email Data 11</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 12</td>
+              <td>Name Data 12</td>
+              <td>Email Data 12</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 13</td>
+              <td>Name Data 13</td>
+              <td>Email Data 13</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 14</td>
+              <td>Name Data 14</td>
+              <td>Email Data 14</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 15</td>
+              <td>Name Data 15</td>
+              <td>Email Data 15</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 16</td>
+              <td>Name Data 16</td>
+              <td>Email Data 16</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 17</td>
+              <td>Name Data 17</td>
+              <td>Email Data 17</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 18</td>
+              <td>Name Data 18</td>
+              <td>Email Data 18</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 19</td>
+              <td>Name Data 19</td>
+              <td>Email Data 19</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 20</td>
+              <td>Name Data 20</td>
+              <td>Email Data 20</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 21</td>
+              <td>Name Data 21</td>
+              <td>Email Data 21</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 22</td>
+              <td>Name Data 22</td>
+              <td>Email Data 22</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 23</td>
+              <td>Name Data 23</td>
+              <td>Email Data 23</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 24</td>
+              <td>Name Data 24</td>
+              <td>Email Data 24</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 25</td>
+              <td>Name Data 25</td>
+              <td>Email Data 25</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 26</td>
+              <td>Name Data 26</td>
+              <td>Email Data 26</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 27</td>
+              <td>Name Data 27</td>
+              <td>Email Data 27</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 28</td>
+              <td>Name Data 28</td>
+              <td>Email Data 28</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 29</td>
+              <td>Name Data 29</td>
+              <td>Email Data 29</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+            <tr>
+              <td>ID Data 30</td>
+              <td>Name Data 30</td>
+              <td>Email Data 30</td>
+              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+            </tr>
+
           </tbody>
           
-          <!-- SAMPLE -->
-          <!-- (tbody>tr>td{ID Data $$}+td{Name Data $$}+td{Email Data $$}+td>a[href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm"]{EDIT}+a[class="btn btn-danger btn-sm" href="#" id="btnDelete" data-id="to be filled"]{DELETE})*10 -->
-          <tbody>
-            <td>ID Data 01</td>
-            <td>Name Data 01</td>
-            <td>Email Data 01</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 02</td>
-            <td>Name Data 02</td>
-            <td>Email Data 02</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 03</td>
-            <td>Name Data 03</td>
-            <td>Email Data 03</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 04</td>
-            <td>Name Data 04</td>
-            <td>Email Data 04</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 05</td>
-            <td>Name Data 05</td>
-            <td>Email Data 05</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 06</td>
-            <td>Name Data 06</td>
-            <td>Email Data 06</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 07</td>
-            <td>Name Data 07</td>
-            <td>Email Data 07</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 08</td>
-            <td>Name Data 08</td>
-            <td>Email Data 08</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 09</td>
-            <td>Name Data 09</td>
-            <td>Email Data 09</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 10</td>
-            <td>Name Data 10</td>
-            <td>Email Data 10</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 11</td>
-            <td>Name Data 11</td>
-            <td>Email Data 11</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 12</td>
-            <td>Name Data 12</td>
-            <td>Email Data 12</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 13</td>
-            <td>Name Data 13</td>
-            <td>Email Data 13</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 14</td>
-            <td>Name Data 14</td>
-            <td>Email Data 14</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 15</td>
-            <td>Name Data 15</td>
-            <td>Email Data 15</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 16</td>
-            <td>Name Data 16</td>
-            <td>Email Data 16</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 17</td>
-            <td>Name Data 17</td>
-            <td>Email Data 17</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 18</td>
-            <td>Name Data 18</td>
-            <td>Email Data 18</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 19</td>
-            <td>Name Data 19</td>
-            <td>Email Data 19</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 20</td>
-            <td>Name Data 20</td>
-            <td>Email Data 20</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 21</td>
-            <td>Name Data 21</td>
-            <td>Email Data 21</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 22</td>
-            <td>Name Data 22</td>
-            <td>Email Data 22</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 23</td>
-            <td>Name Data 23</td>
-            <td>Email Data 23</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 24</td>
-            <td>Name Data 24</td>
-            <td>Email Data 24</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 25</td>
-            <td>Name Data 25</td>
-            <td>Email Data 25</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 26</td>
-            <td>Name Data 26</td>
-            <td>Email Data 26</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 27</td>
-            <td>Name Data 27</td>
-            <td>Email Data 27</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 28</td>
-            <td>Name Data 28</td>
-            <td>Email Data 28</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 29</td>
-            <td>Name Data 29</td>
-            <td>Email Data 29</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
-          <tbody>
-            <td>ID Data 30</td>
-            <td>Name Data 30</td>
-            <td>Email Data 30</td>
-            <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
-          </tbody>
 
 
         </table
