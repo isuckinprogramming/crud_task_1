@@ -33,9 +33,9 @@ $id=mysqli_real_escape_string($conn,$_POST['id']);
 
 
  $response[]=array(
-         "status"=>($status),
-         "error"=>($error)
-         );
+    "status"=>($status),
+    "error"=>($error)
+  );
 
 
 echo json_encode($response);

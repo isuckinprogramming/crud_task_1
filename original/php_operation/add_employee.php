@@ -39,7 +39,6 @@ $email=mysqli_real_escape_string($conn,$_POST['email']);
          "error"=>($error)
          );
 
-
 echo json_encode($response);
 
  
