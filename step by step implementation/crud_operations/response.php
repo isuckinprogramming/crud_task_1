@@ -29,15 +29,17 @@ class Response {
   }
   
 
-  private function setError( $name ) {
+  private function setError( $name, $errorMsgTemplate = "The %s is blank. Blank string is invalid\n" ) {
+
     if($name === 'email'){  
-      $this->errorMessage .= "The Email is blank. Blank string is invalid\n";
+      $this->errorMessage .= sprintf($errorMsgTemplate, "email");
     }
     elseif($name === 'LName'){
-      $this->errorMessage .= "The LName is blank. Blank string is invalid\n";
+      $this->errorMessage .=  sprintf($errorMsgTemplate, "LName");
     }
     elseif($name === 'FName'){
-      $this->errorMessage .= "The FName is blank. Blank string is invalid\n";
+      $this->errorMessage .= sprintf($errorMsgTemplate, "FName");
     }
   }
+
 };
