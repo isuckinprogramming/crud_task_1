@@ -23,6 +23,3 @@ while($row = $query->fetch_assoc()){
 
 echo json_encode($response);
 
-
-
-?>
