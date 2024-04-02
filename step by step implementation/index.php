@@ -20,7 +20,7 @@
 
       <!-- div.card-body>a[href="3" class="btn btn-primary btn-sm" id="btnAdd" ]{+ Add employee} -->
       <div class="card-body">
-        <a href="3" class="btn btn-primary btn-sm" id="btnAdd">+ Add employee</a>
+        <a href="#" class="btn btn-primary btn-sm" id="btnAdd">+ Add employee</a>
         <!-- table[id="table1" class="table table-bordered"]>thead>tr>th{Employee}+th{Name}+th{Email}+th -->
         <table id="table1" class="table table-bordered">
           <thead>
@@ -62,7 +62,16 @@
               <td>ID Data 01</td>
               <td>Name Data 01</td>
               <td>Email Data 01</td>
-              <td><a href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm">EDIT</a><a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">DELETE</a></td>
+              <td>
+                <a href="#" id="btnEdit" 
+                data-id="to be filled" data-first_name="to be filled" 
+                data-last_name="to be filled" data-email="to be filled" 
+                class="btn btn-warning btn-sm">EDIT</a>
+                <a href="#" class="btn btn-danger btn-sm" 
+                id="btnDelete" data-id="to be filled">
+                DELETE
+                </a>
+              </td>
             </tr>
             <tr>
               <td>ID Data 02</td>
@@ -240,15 +249,8 @@
             </tr>
 
           </tbody>
-          
-
-
         </table
-
       </div>
-      
-
-
     </div>
   </div>
   
@@ -321,7 +323,82 @@
   
 <!-- event handling code -->
 <script>
+
 $('#table1').DataTable();
+
+function showAlert(icon, title, content){
+    Swal.fire({
+    icon: icon,
+    title: title,
+    text: content,
+    confirmButtonText: 'CONTINUE',
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    }).then((result) => {
+
+    if (result.isConfirmed) { 
+        if(icon=='success') 
+        location.reload(true); //reload the page
+    }
+    });
+}
+
+const addEmployee = () => {
+    const fname = $('#txtFname').val();
+    const lname =  $('#txtLname').val();
+    const email =  $('#txtEmail').val();
+
+    let isThereError = false;
+    let emptyErrorMsg = "Please enter ";
+    //check if empty
+    if(fname===""){
+      isThereError = true;
+      emptyErrorMsg += ' firstname ';
+    }
+    if(lname===""){
+      isThereError = true;
+      emptyErrorMsg += ', lastname ';
+    }
+    if(email===""){
+      isThereError = true;
+      emptyErrorMsg += ', email ';     
+    }
+
+    if(isThereError){
+      showAlert('error','Empty Fields',emptyErrorMsg);
+    }
+    
+  $.ajax( {
+      type: "POST",
+      url: "crud_operations/add_employee.php",
+      data: {
+        "fname": fname,
+        "lname": lname,
+        "email": email
+      },
+      dataType: 'JSON',
+      success: function(response){
+        const status = response.status;
+        const error = response.errorMessage;
+        if(status=="success")  showAlert('success','Success','Employee added!');
+        if(status=="error")  showAlert('error','Error',error)
+      }
+    }
+  );
+}
+
+
+$(document).on(
+  'click',
+  '#btnAdd', 
+  () => { $('#modalAdd').modal('show'); } 
+);
+
+$(document).on(
+  'click',
+  '#btnSave', 
+  () =>{ addEmployee();}
+);
 
 </script>
 

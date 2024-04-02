@@ -4,7 +4,6 @@ require_once('response.php');
 
 $conn = getHRDBConnection();
 
-
 function addEmployee() {
 
   global $conn;
@@ -12,28 +11,28 @@ function addEmployee() {
 
   $response = new Response();
 
-  $fname = mysqli_real_escape_string($conn,$_POST['fname']);
-  if($fname===""){
-    $response->isFNameValid = true;
-    $response->errorMessage .= "The FName is blank. Blank string is invalid\n";
-  }
-  $lname = mysqli_real_escape_string($conn,$_POST['lname']);
-  if($lname===""){
-    $response->isLNameValid = true;
-    $response->errorMessage .= "The LName is blank. Blank string is invalid\n";
-  }
+  $fname = mysqli_real_escape_string($conn,$_POST['lname']);
+  $response->setValidity('fName', !($fname == "") );
+
+  $lname = mysqli_real_escape_string($conn,$_POST['fname']);
+  $response->setValidity('lName', !($lname == ""));
 
   $email = mysqli_real_escape_string($conn,$_POST['email']);
-  if($email===""){
-    $response->isEmailValid = true;
-    $response->errorMessage .= "The Email is blank. Blank string is invalid\n";
-  }
+  $response->setValidity('email', !($email == ""));
 
-  if($response->isAnyFieldInvalid()){
-    // terminate function 
-    return;    
+  if($response->isAnyFieldInvalid()){ return; }
+
+  $sql = "INSERT INTO employees(first_name,last_name,email) VALUES('$fname','$lname','$email');";
+  $result = $conn->query($sql);
+
+  // Debugging purposes
+  if (!$result) {
+    $response->errorMessage .= $conn->connect_errno . '\n' . $conn->error . '\n' .$sql;  
+    $response->status = "error";
   }
-  $sql = "INSERT INTO employees(first_name,last_name,email) VALUES('$fname','$lname','$email')";
-  $response->status = $conn->query($sql)? "success":"error";
+  $response->status = "success";
+  
   echo json_encode($response);
 }
+
+addEmployee();
