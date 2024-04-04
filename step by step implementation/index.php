@@ -15,7 +15,7 @@
   <div class="container-fluid">
     <div class="card mt-3">
       <div class="card-header">
-        <h5> <?php $tableName = "job_history"; echo $tableName; ?> </h5>
+        <h5> <?php $tableName = "employees"; echo $tableName; ?> </h5>
       </div>
       <!-- div.card-body>a[href="3" class="btn btn-primary btn-sm" id="btnAdd" ]{+ Add employee} -->
       <div class="card-body container-fluid">
@@ -27,10 +27,10 @@
             generate_table($tableName); 
           ?>
           <thead>
-            <?php echo $tableObject["header"]; ?>
+            <?php echo $currentTableGenerated["header"]; ?>
           </thead>
           <tbody>
-            <?php echo $tableObject["body"]; ?>
+            <?php echo $currentTableGenerated["body"]; ?>
           </tbody>
           <div>
           <!-- tbody>td{ID Data}+td{Name Data}+td{Email Data}+td -->
@@ -60,7 +60,10 @@
 
             <!-- SAMPLE -->
             <!-- (tr>td{ID Data $$}+td{Name Data $$}+td{Email Data $$}+td>a[href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm"]{EDIT}+a[class="btn btn-danger btn-sm" href="#" id="btnDelete" data-id="to be filled"]{DELETE})*10 -->
-          </div>        
+          </div>     
+          <?php
+
+          ?>  
         </table
       </div>
     </div>
@@ -100,7 +103,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">EDIT EMPLOYEE</h4>
+          <h4 class="modal-title" id="edit-modal-table-title">EDIT EMPLOYEE</h4>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 
         </div>
@@ -137,6 +140,13 @@
 <script>
 
 $('#table1').DataTable();
+
+$ajax({
+  type:'GET',
+  
+});
+
+let currentTableInView = {};
 
 function showAlert(icon, title, content){
     Swal.fire({
@@ -199,6 +209,8 @@ const addEmployee = () => {
     );
 }
 
+
+
 $(document).on(
   'click',
   '#btnAdd', 
@@ -208,7 +220,13 @@ $(document).on(
 $(document).on(
   'click',
   '#btnSave', 
-  () =>{ addEmployee();}
+  addEmployee
+);
+
+$(document).on(
+  'click',
+  '.btnEdit',
+  editTableEntry
 );
 
 </script>
