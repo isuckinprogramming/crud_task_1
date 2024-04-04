@@ -15,29 +15,24 @@
   <div class="container-fluid">
     <div class="card mt-3">
       <div class="card-header">
-        <h5>Employee Table</h5>
+        <h5> <?php $tableName = "job_history"; echo $tableName; ?> </h5>
       </div>
-
       <!-- div.card-body>a[href="3" class="btn btn-primary btn-sm" id="btnAdd" ]{+ Add employee} -->
       <div class="card-body container-fluid">
         <a href="#" class="btn btn-primary btn-sm" id="btnAdd">+ Add employee</a>
         <!-- table[id="table1" class="table table-bordered"]>thead>tr>th{Employee}+th{Name}+th{Email}+th -->
         <table id="table1" class="table table-bordered">
-
           <?php
-          include "<crud_operations/generate_table_contents.php";
-            generate_table("employees");
+            include "<crud_operations/generate_table_contents.php";
+            generate_table($tableName); 
           ?>
           <thead>
-            <?php
-              echo $tableObject["header"];
-            ?>
+            <?php echo $tableObject["header"]; ?>
           </thead>
           <tbody>
-            <?php
-            echo $tableObject["body"];
-            ?>
+            <?php echo $tableObject["body"]; ?>
           </tbody>
+          <div>
           <!-- tbody>td{ID Data}+td{Name Data}+td{Email Data}+td -->
           <!-- 
             <tr>
@@ -65,6 +60,7 @@
 
             <!-- SAMPLE -->
             <!-- (tr>td{ID Data $$}+td{Name Data $$}+td{Email Data $$}+td>a[href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm"]{EDIT}+a[class="btn btn-danger btn-sm" href="#" id="btnDelete" data-id="to be filled"]{DELETE})*10 -->
+          </div>        
         </table
       </div>
     </div>
@@ -184,25 +180,24 @@ const addEmployee = () => {
       showAlert('error','Empty Fields',emptyErrorMsg);
     }
     
-  $.ajax( {
-      type: "POST",
-      url: "crud_operations/add_employee.php",
-      data: {
-        "fname": fname,
-        "lname": lname,
-        "email": email
-      },
-      dataType: 'JSON',
-      success: function(response){
-        const status = response.status;
-        const error = response.errorMessage;
-        if(status=="success")  showAlert('success','Success','Employee added!');
-        if(status=="error")  showAlert('error','Error',error)
+    $.ajax( {
+        type: "POST",
+        url: "crud_operations/add_employee.php",
+        data: {
+          "fname": fname,
+          "lname": lname,
+          "email": email
+        },
+        dataType: 'JSON',
+        success: function(response){
+          const status = response.status;
+          const error = response.errorMessage;
+          if(status=="success")  showAlert('success','Success','Employee added!');
+          if(status=="error")  showAlert('error','Error',error)
+        }
       }
-    }
-  );
+    );
 }
-
 
 $(document).on(
   'click',

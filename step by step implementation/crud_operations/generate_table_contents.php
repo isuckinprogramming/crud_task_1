@@ -4,24 +4,27 @@ include_once "dbOperations.php";
 $tableObject = [];
 
 function generate_body_content($table_data_raw) {
+  
+  if(session_status() == PHP_SESSION_NONE)  {
+    session_start();
+  }
 
   $table_row_template = "<tr>
-            %s
             <td>
               <a 
                 href=\"#\" 
-                id=\"btnEdit\" 
                 data-id=\"to be filled\" 
                 data-first_name=\"to be filled\" 
                 data-last_name=\"to be filled\" 
                 data-email=\"to be filled\" 
-                class=\"btn btn-warning btn-sm\">
+                class=\"btn btn-warning btn-sm btnEdit\">
                 EDIT
               </a>
               <a href=\"#\" class=\"btn btn-danger btn-sm\" id=\"btnDelete\" data-id=\"to be filled\">
                 DELETE
               </a>
             </td>
+            %s
           </tr>";
   $table_data_template = "<td>%s</td>\n";
 
@@ -44,9 +47,9 @@ function generate_body_content($table_data_raw) {
 function generate_column_headers($column_headers) {
   
   $header_row_template= "\n<tr>
-    %s
     <th>\n
     </th>\n
+    %s
   </tr>\n";
 
   $header_data_template = "    
@@ -73,16 +76,20 @@ function generate_table($tableName){
   if ($tableName == "") { return; }
 
   $sql = "SELECT * FROM $tableName;";
-  $result = $conn->query($sql);
+  $result = executeQueryHandleError($conn, $sql);
 
-  $column_headers = $result->fetch_fields();
+  if (!$result["status"]) {
+    // Debugging purposes only to display the error msgs
+    echo $result;
+    return;
+  }
+  $column_headers = $result["result"]->fetch_fields();
 
   $headerHTML = generate_column_headers($column_headers);
 
-  $bodyHTML = generate_body_content($result);
+  $bodyHTML = generate_body_content($result["result"]);
 
   global $tableObject;
   $tableObject = [ "header" => $headerHTML, "body" => $bodyHTML];
 }
-
 
