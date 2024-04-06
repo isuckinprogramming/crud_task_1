@@ -44,8 +44,13 @@ function generate_body_content($table_data_raw) {
 
   return $table_Body_HTML;
 }
+
 function generate_column_headers($column_headers) {
   
+  if(session_status() == PHP_SESSION_NONE)  {
+    session_start();
+  }
+
   $header_row_template= "\n<tr>
     <th>\n
     </th>\n
@@ -58,9 +63,10 @@ function generate_column_headers($column_headers) {
     </th>\n";
 
   $allColumnHeaders = "";
-  
+  $headers = [];
   foreach ($column_headers as $header) {
     $allColumnHeaders .= sprintf($header_data_template, $header->name);
+    $headers[] = $header->name;
   }
 
   return sprintf($header_row_template, $allColumnHeaders);
