@@ -52,8 +52,13 @@ function generate_body_content($table_data_raw) {
     'filtered_data'=>$all_filtered_row_data
   ];
 }
+
 function generate_column_headers($column_headers) {
   
+  if(session_status() == PHP_SESSION_NONE)  {
+    session_start();
+  }
+
   $header_row_template= "\n<tr>
     <th>\n
     </th>\n

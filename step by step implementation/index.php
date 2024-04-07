@@ -16,6 +16,7 @@
     <div class="card mt-3">
       <div class="card-header">
         <h5> <?php $tableName = "employees"; echo $tableName; ?> </h5>
+        <h5> <?php $tableName = "employees"; echo $tableName; ?> </h5>
       </div>
       <!-- div.card-body>a[href="3" class="btn btn-primary btn-sm" id="btnAdd" ]{+ Add employee} -->
       <div class="card-body container-fluid">
@@ -80,13 +81,13 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal">  
           </button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" id="container-for-input-label" >
           <!-- label[for="txtFname"]{First Name:}+input[type="text"  id="txtFname" class="form-control"]+label[for="txtLname"]{Last Name:}+input[type="text" id="txtLname" class="form-control"]+label[for="txtEmail"]{Email Address:}+input[type="text" id="txtEmail" class="form-control"] -->
-          <label for="txtFname">First Name:</label><input type="text" id="txtFname" class="form-control">
+          <!-- <label for="txtFname">First Name:</label><input type="text" id="txtFname" class="form-control">
           
           <label for="txtLname">Last Name:</label><input type="text" id="txtLname" class="form-control">
           
-          <label for="txtEmail">Email Address:</label><input type="text" id="txtEmail" class="form-control">
+          <label for="txtEmail">Email Address:</label><input type="text" id="txtEmail" class="form-control"> -->
         </div>
         <div class="modal-footer">
           <!-- button[type="button" class="btn btn-danger" data-bs-dismiss="modal"]{CANCEL}+button[type="button" class="btn btn-success" id="btnSave"]{SAVE} -->
@@ -137,7 +138,7 @@
 <script src="datatables/datatables.min.js"></script>
   
 <!-- event handling code -->
-<script>
+<script defer="true">
 
 $('#table1').DataTable();
 
@@ -163,6 +164,52 @@ function showAlert(icon, title, content){
         location.reload(true); //reload the page
     }
     });
+}
+
+function createFormLabelAndInput(names, generationNumber, type = "text"){
+
+
+
+
+  let idOfLabel = "lbl-input-" + names;
+  let idOfInput = "input-" + names;
+  let labelContent  = "";
+//  Should prepare for input with different types and prepare for a different type of selection
+  if(typeof names == "string" ){
+    labelContent = "Enter " + names; 
+  } else {
+    labelContent = names.names;
+    type = names.type;
+  }
+
+  return`<label for="${idOfInput}" id="${idOfLabel}">${labelContent}</label> <br>
+  <input name="${idOfInput}" type="${type}" id="${idOfInput}" class="form-control"> <br>`;
+}
+
+function generateLabelAndInput(){
+
+  const columnNames = [
+    "employee_id",
+    "first_name",
+    "last_name",
+    "email_acc",
+    "password",
+    "hire_date",
+    "phone_number",
+    "job_id",
+    "commision_pct",
+     "manager_id",
+     "department_id" ];
+
+  const allHTMLOutput = columnNames.reduce(
+      ( acc, curr, index) =>{
+          acc += createFormLabelAndInput(curr, index);
+          return acc;
+      }, 
+      ""
+  );
+
+  return allHTMLOutput;
 }
 
 const addEmployee = () => {
@@ -209,26 +256,22 @@ const addEmployee = () => {
     );
 }
 
-
-
 $(document).on(
   'click',
   '#btnAdd', 
-  () => { $('#modalAdd').modal('show'); } 
+  () => {
+    $('#modalAdd').modal('show'); 
+  } 
 );
 
 $(document).on(
   'click',
   '#btnSave', 
-  addEmployee
+  () =>{ addEmployee();}
 );
 
-$(document).on(
-  'click',
-  '.btnEdit',
-  editTableEntry
-);
-
+// HTML MODIFICATIONS 
+$('#container-for-input-label').html( generateLabelAndInput());
 </script>
 
 </body>
