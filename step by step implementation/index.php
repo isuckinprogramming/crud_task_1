@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="sweetalert/sweetalert2.min.css">
   <link rel="stylesheet" href="datatables/datatables.min.css">
+
+  <script defer="true" src="./js/jquery.min.js"></script>
+  <script defer="true" src="./index.js" type="module"></script>
 </head>
 <body>
   <!-- DISPLAY TABLE  -->
@@ -62,9 +65,6 @@
             <!-- SAMPLE -->
             <!-- (tr>td{ID Data $$}+td{Name Data $$}+td{Email Data $$}+td>a[href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm"]{EDIT}+a[class="btn btn-danger btn-sm" href="#" id="btnDelete" data-id="to be filled"]{DELETE})*10 -->
           </div>     
-          <?php
-
-          ?>  
         </table
       </div>
     </div>
@@ -82,12 +82,7 @@
           </button>
         </div>
         <div class="modal-body" id="container-for-input-label" >
-          <!-- label[for="txtFname"]{First Name:}+input[type="text"  id="txtFname" class="form-control"]+label[for="txtLname"]{Last Name:}+input[type="text" id="txtLname" class="form-control"]+label[for="txtEmail"]{Email Address:}+input[type="text" id="txtEmail" class="form-control"] -->
-          <!-- <label for="txtFname">First Name:</label><input type="text" id="txtFname" class="form-control">
-          
-          <label for="txtLname">Last Name:</label><input type="text" id="txtLname" class="form-control">
-          
-          <label for="txtEmail">Email Address:</label><input type="text" id="txtEmail" class="form-control"> -->
+          <!-- label[for="txtFname"]{First Name:}+input[type="text"  id="txtFname" class="form-control"]+label[for="txtLname"]{Last Name:}+input[type="text" id="txtLname" class="form-control"]+label[for="txtEmail"]{Email Address:}+input[type="text" id="txtEmail" class="form-control"] -->          
         </div>
         <div class="modal-footer">
           <!-- button[type="button" class="btn btn-danger" data-bs-dismiss="modal"]{CANCEL}+button[type="button" class="btn btn-success" id="btnSave"]{SAVE} -->
@@ -130,149 +125,5 @@
       </div>
     </div>
   </div>
-
-<!-- import scripts -->
-<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="sweetalert/sweetalert2.all.min.js"></script>
-<script src="js/jquery.min.js"></script>
-<script src="datatables/datatables.min.js"></script>
-  
-<!-- event handling code -->
-<script defer="true">
-
-$('#table1').DataTable();
-
-$ajax({
-  type:'GET',
-  
-});
-
-let currentTableInView = {};
-
-function showAlert(icon, title, content){
-    Swal.fire({
-    icon: icon,
-    title: title,
-    text: content,
-    confirmButtonText: 'CONTINUE',
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    }).then((result) => {
-
-    if (result.isConfirmed) { 
-        if(icon=='success') 
-        location.reload(true); //reload the page
-    }
-    });
-}
-
-function createFormLabelAndInput(names, generationNumber, type = "text"){
-
-
-
-
-  let idOfLabel = "lbl-input-" + names;
-  let idOfInput = "input-" + names;
-  let labelContent  = "";
-//  Should prepare for input with different types and prepare for a different type of selection
-  if(typeof names == "string" ){
-    labelContent = "Enter " + names; 
-  } else {
-    labelContent = names.names;
-    type = names.type;
-  }
-
-  return`<label for="${idOfInput}" id="${idOfLabel}">${labelContent}</label> <br>
-  <input name="${idOfInput}" type="${type}" id="${idOfInput}" class="form-control"> <br>`;
-}
-
-function generateLabelAndInput(){
-
-  const columnNames = [
-    "employee_id",
-    "first_name",
-    "last_name",
-    "email_acc",
-    "password",
-    "hire_date",
-    "phone_number",
-    "job_id",
-    "commision_pct",
-     "manager_id",
-     "department_id" ];
-
-  const allHTMLOutput = columnNames.reduce(
-      ( acc, curr, index) =>{
-          acc += createFormLabelAndInput(curr, index);
-          return acc;
-      }, 
-      ""
-  );
-
-  return allHTMLOutput;
-}
-
-const addEmployee = () => {
-    const fname = $('#txtFname').val();
-    const lname =  $('#txtLname').val();
-    const email =  $('#txtEmail').val();
-
-    let isThereError = false;
-    let emptyErrorMsg = "Please enter ";
-    //check if empty
-    if(fname===""){
-      isThereError = true;
-      emptyErrorMsg += ' firstname ';
-    }
-    if(lname===""){
-      isThereError = true;
-      emptyErrorMsg += ', lastname ';
-    }
-    if(email===""){
-      isThereError = true;
-      emptyErrorMsg += ', email ';     
-    }
-
-    if(isThereError){
-      showAlert('error','Empty Fields',emptyErrorMsg);
-    }
-    
-    $.ajax( {
-        type: "POST",
-        url: "crud_operations/add_employee.php",
-        data: {
-          "fname": fname,
-          "lname": lname,
-          "email": email
-        },
-        dataType: 'JSON',
-        success: function(response){
-          const status = response.status;
-          const error = response.errorMessage;
-          if(status=="success")  showAlert('success','Success','Employee added!');
-          if(status=="error")  showAlert('error','Error',error)
-        }
-      }
-    );
-}
-
-$(document).on(
-  'click',
-  '#btnAdd', 
-  () => {
-    $('#modalAdd').modal('show'); 
-  } 
-);
-
-$(document).on(
-  'click',
-  '#btnSave', 
-  () =>{ addEmployee();}
-);
-
-// HTML MODIFICATIONS 
-$('#container-for-input-label').html( generateLabelAndInput());
-</script>
-
 </body>
 </html>
