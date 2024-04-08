@@ -1,8 +1,7 @@
 import './bootstrap/js/bootstrap.bundle.min.js';
 import './sweetalert/sweetalert2.all.min.js';
-import './datatables/datatables.min.js'
+import './datatables/datatables.min.js';
 // Jquery will be imported first by html file
-
 
 $('#table1').DataTable();
 let currentTableInView = {};
@@ -99,7 +98,7 @@ const addEmployee = () => {
       }
     );
 }
-
+// EVENTS
 $(document).on(
   'click',
   '#btnAdd', 
