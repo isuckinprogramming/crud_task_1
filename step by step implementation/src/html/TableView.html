@@ -5,77 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CRUD Step-by-Step</title>
 
-  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="sweetalert/sweetalert2.min.css">
-  <link rel="stylesheet" href="datatables/datatables.min.css">
+  <link rel="stylesheet" href="./../../bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./../../sweetalert/sweetalert2.min.css">
+  <link rel="stylesheet" href="./../../datatables/datatables.min.css">
 
-  <script defer="true" src="./js/jquery.min.js"></script>
+  <script defer="true" src="./../../jquery/jquery.min.js"></script>
 
-  <script defer="true" src="./TableView.js" type="module"></script>
+  <script defer="true" src="./../js/TableView.js" type="module"></script>
 </head>
 <body>
-  <?php
-    include "<crud_operations/generate_table_contents.php";
-
-    $tableName = "employees"; 
-    generate_table($tableName); 
-  
-  ?>
-  
+  <div>
+    <label for="input-table-name">Choose a Table:</label>
+    <select id="input-table-name" name="input-table-name">
+        <option value="employees" selected >employees</option>
+        <option value="countries" >countries</option>
+        <option value="departments">departments</option>
+        <option value="jobs">jobs</option>
+        <option value="job_history">job_history</option>
+        <option value="locations">locations</option>
+        <option value="regions">regions</option>
+    </select>
+    <button type="button" id="submitChangeTable" >Submit</button>
+  </div>
+    
   <!-- DISPLAY TABLE  -->
   <!-- div.container>div[class="card mt-3"]>div.card-header>h5{Employee Table} -->
   <div class="container-fluid">
     <div class="card mt-3">
       <div class="card-header">
-        <h5> <?php echo $tableName; ?> </h5>
+        <h5 id="display-table-name" > </h5>
       </div>
-      <!-- div.card-body>a[href="3" class="btn btn-primary btn-sm" id="btnAdd" ]{+ Add employee} -->
       <div class="card-body container-fluid">
         <a href="#" class="btn btn-primary btn-sm" id="btnAdd">+ Add employee</a>
-        <!-- table[id="table1" class="table table-bordered"]>thead>tr>th{Employee}+th{Name}+th{Email}+th -->
         <table id="table1" class="table table-bordered">
-
-          <thead>
-            <?php echo $currentTableGenerated["header"]; ?>
-          </thead>
-          <tbody>
-            <?php echo $currentTableGenerated["body"]; ?>
-          </tbody>
-          <div>
-          <!-- tbody>td{ID Data}+td{Name Data}+td{Email Data}+td -->
-          <!-- 
-            <tr>
-              <td>ID Data</td>
-              <td>Name Data</td>
-              <td>Email Data</td>
-              <td> -->
-                <!-- a[href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm"]{EDIT} -->
-                <!-- <a 
-                  href="#" 
-                  id="btnEdit" 
-                  data-id="to be filled" 
-                  data-first_name="to be filled" 
-                  data-last_name="to be filled" 
-                  data-email="to be filled" 
-                  class="btn btn-warning btn-sm">
-                  EDIT
-                </a> -->
-                <!-- a[class="btn btn-danger btn-sm" href="#" id="btnDelete" data-id="to be filled"] -->
-                <!-- <a href="#" class="btn btn-danger btn-sm" id="btnDelete" data-id="to be filled">
-                  DELETE
-                </a>
-              </td>
-            </tr> -->
-
-            <!-- SAMPLE -->
-            <!-- (tr>td{ID Data $$}+td{Name Data $$}+td{Email Data $$}+td>a[href="#" id="btnEdit" data-id="to be filled" data-first_name="to be filled" data-last_name="to be filled" data-email="to be filled" class="btn btn-warning btn-sm"]{EDIT}+a[class="btn btn-danger btn-sm" href="#" id="btnDelete" data-id="to be filled"]{DELETE})*10 -->
-          </div>     
+          <thead id="display-table-head"></thead>
+          <tbody id="display-table-body"></tbody>
         </table
       </div>
-    </div>
-  
+    </div>  
   </div>
-  
   <!-- ADD MODAL -->
   <!-- div[class="modal fade" id="modalAdd"]>div[class="modal-dialog"]>div[class="modal-content"]>div[class="modal-header"]+div.modal-body+div.modal-footer -->
   <div class="modal fade" id="modalAdd">
@@ -98,7 +66,6 @@
       </div>
     </div>
   </div>
-
   <!-- EDIT MODAL -->
   <!-- div[class="modal fade" id="modalEdit"]>div[class="modal-dialog"]>div[class="modal-content"]>div[class="modal-header"]+div.modal-body+div.modal-footer -->
   <div class="modal fade" id="modalEdit">

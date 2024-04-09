@@ -1,6 +1,6 @@
-import './bootstrap/js/bootstrap.bundle.min.js';
-import './sweetalert/sweetalert2.all.min.js';
-import './datatables/datatables.min.js';
+import './../../bootstrap/js/bootstrap.bundle.min.js';
+import './../../sweetalert/sweetalert2.all.min.js';
+import './../../datatables/datatables.min.js';
 // Jquery will be imported first by html file
 
 $('#table1').DataTable();
@@ -54,7 +54,52 @@ function generateLabelAndInput(){
 
   return allHTMLOutput;
 }
+const generateTable = () => { 
+  const tableName = $('#input-table-name').val();
+  $.ajax(
+    {
+      type: "POST",
+      url: "./../../crud_operations/generate_table_contents.php",
+      data: {
+        "input-table-name": tableName,
+      },
+      dataType: 'JSON',
+      success: function(response){
+        
+        // const status = response.status;
+        // const error = response.errorMessage;
 
+        // if(status=="success")  showAlert('success','Success','Table Change Success!');
+        // if(status=="error")  showAlert('error','Error',error)
+        
+        console.log(response);
+      }
+    }
+
+  );
+
+    $.ajax(
+    {
+      type: "GET",
+      url: "./../../crud_operations/generate_table_contents.php",
+      data: {
+        "input-table-name": tableName,
+      },
+      dataType: 'JSON',
+      success: function(response){
+          
+        // const status = response.status;
+        // const error = response.errorMessage;
+
+        // if(status=="success")  showAlert('success','Success','Table Change Success!');
+        // if(status=="error")  showAlert('error','Error',error)
+        
+        console.log(response);
+      }
+    }
+
+  );
+}
 const addEmployee = () => {
     const fname = $('#txtFname').val();
     const lname =  $('#txtLname').val();
@@ -107,6 +152,11 @@ $(document).on(
   } 
 );
 
+$(document).on(
+  "click",
+  "#submitChangeTable",
+  () => { generateTable() }
+);
 $(document).on(
   'click',
   '#btnSave', 
