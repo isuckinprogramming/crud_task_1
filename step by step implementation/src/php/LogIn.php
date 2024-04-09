@@ -22,9 +22,10 @@ function log_in_trial() {
      
         $_SESSION["is_login_verified"] = true;
         
+        // Using an absolute reference is kind of shit. Causes a lot of problems 
         $response = [ 
           "login_status" => $_SESSION["is_login_verified"],
-          "next_page" => "http://localhost/it26l/lim/crud_task_1/step%20by%20step%20implementation/src/php/TableView.html"
+          "next_page" => "http://localhost/it26l/lim/crud_task_1/step%20by%20step%20implementation/src/html/TableView.html"
         ];
         
         echo json_encode($response);

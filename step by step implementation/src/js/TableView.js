@@ -64,40 +64,20 @@ const generateTable = () => {
         "input-table-name": tableName,
       },
       dataType: 'JSON',
-      success: function(response){
-        
-        // const status = response.status;
-        // const error = response.errorMessage;
-
-        // if(status=="success")  showAlert('success','Success','Table Change Success!');
-        // if(status=="error")  showAlert('error','Error',error)
+      success: function (response) {
         
         console.log(response);
-      }
-    }
 
-  );
+        $('#display-table-name').html(response.table_name);
+        $('#display-table-head').html(response.table_header);
+        $('#display-table-body').html(response.table_body);
 
-    $.ajax(
-    {
-      type: "GET",
-      url: "./../../crud_operations/generate_table_contents.php",
-      data: {
-        "input-table-name": tableName,
       },
-      dataType: 'JSON',
-      success: function(response){
-          
-        // const status = response.status;
-        // const error = response.errorMessage;
+      error: function( xhr, status, error ){ 
 
-        // if(status=="success")  showAlert('success','Success','Table Change Success!');
-        // if(status=="error")  showAlert('error','Error',error)
-        
-        console.log(response);
-      }
+        console.log("XHR: " + xhr, "STATUS: " + status, "ERROR : " + error);
+      } 
     }
-
   );
 }
 const addEmployee = () => {

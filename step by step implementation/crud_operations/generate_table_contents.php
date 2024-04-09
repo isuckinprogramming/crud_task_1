@@ -3,12 +3,16 @@ include_once "dbOperations.php";
 
 // If the session is started when the table is not 
 // yet generated then the default table will be the employees table
-if(session_status() == PHP_SESSION_NONE)  {
-  session_start();
-  $_SESSION['table_name'] = "employees";
-} else {
-  $_SESSION['table_name'] = $_POST['input-table-name'];
-}
+// if(session_status() == PHP_SESSION_NONE)  {
+//   session_start();
+
+//   if (isset($_SESSION['table_name']) == false) {
+//     $_SESSION['table_name'] = "employees";
+    
+//   }
+// } else {
+//   $_SESSION['table_name'] = $_POST['input-table-name'];
+// }
 
 function generate_body_content($table_data_raw) {
   $table_row_template = "<tr>
@@ -87,10 +91,10 @@ function generate_column_headers($column_headers) {
 
 function generate_table($tableName){
 
-  if(session_status() == PHP_SESSION_NONE ){
-    session_start();
-    $tableName = "employees";
-  }
+  // if(session_status() == PHP_SESSION_NONE ){
+  //   session_start();
+  //   $tableName = "employees";
+  // }
 
   if ($tableName === "") { return; }
   
@@ -119,5 +123,9 @@ function generate_table($tableName){
   ];
 }
 
-$tableData = generate_table($_SESSION['table_name']);
-echo json_encode($tableData);
+
+if (isset($_POST['input-table-name']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
+  $tableData = generate_table($_POST['input-table-name']);
+  echo json_encode($tableData);
+}  
+
