@@ -5,6 +5,21 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Launch Chrome",
+      "request": "launch",
+      "type": "chrome",
+      "url": "http://localhost/it26l/lim//crud_task_1/step%20by%20step%20implementation/dist/index.php",
+      "webRoot": "${workspaceFolder}"
+    },
+
+  {
+    "name": "Launch Edge",
+    "request": "launch",
+    "type": "msedge",
+    "url": "http://localhost/it26l/lim//crud_task_1/step%20by%20step%20implementation/dist/index.php",
+    "webRoot": "${workspaceFolder}"
+  },
+    {
       "name": "Launch built-in server and debug",
       "type": "php",
       "request": "launch",
