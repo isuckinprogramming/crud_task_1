@@ -25,7 +25,8 @@ function executeQueryHandleError( mysqli $conn, $sql)  {
   return ($result) ? 
   [ 
     "status" => true,
-    "result" => $result 
+    "result" => $result,
+    "mysqlQuery" => $sql
   ]
    : 
   [

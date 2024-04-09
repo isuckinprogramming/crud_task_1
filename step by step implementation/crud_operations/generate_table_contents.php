@@ -1,14 +1,16 @@
 <?php
 include_once "dbOperations.php";
 
-$currentTableGenerated = [
-  "header" => "",
-  "body" => ""
-];
+// If the session is started when the table is not 
+// yet generated then the default table will be the employees table
+if(session_status() == PHP_SESSION_NONE)  {
+  session_start();
+  $_SESSION['table_name'] = "employees";
+} else {
+  $_SESSION['table_name'] = $_POST['input-table-name'];
+}
 
 function generate_body_content($table_data_raw) {
-
-
   $table_row_template = "<tr>
             <td>
               <button
@@ -54,10 +56,6 @@ function generate_body_content($table_data_raw) {
 }
 
 function generate_column_headers($column_headers) {
-  
-  if(session_status() == PHP_SESSION_NONE)  {
-    session_start();
-  }
 
   $header_row_template= "\n<tr>
     <th>\n
@@ -89,6 +87,11 @@ function generate_column_headers($column_headers) {
 
 function generate_table($tableName){
 
+  if(session_status() == PHP_SESSION_NONE ){
+    session_start();
+    $tableName = "employees";
+  }
+
   if ($tableName === "") { return; }
   
   $conn = getHRDBConnection();
@@ -104,22 +107,17 @@ function generate_table($tableName){
     echo $result;
     return;
   }
-  $column_headers = $result["result"]->fetch_fields();
 
-  global $currentTableGenerated;
-  
-  if(session_status() == PHP_SESSION_NONE ){
-    session_start();
-  }
-
+  $column_headers = $result["result"]->fetch_fields();  
   $resultHeader = generate_column_headers($column_headers);
-  $_SESSION['filtered_header_data'] = $resultHeader['filtered_data'];
-  $currentTableGenerated['header'] = $resultHeader['head'];
-
   $resultBody = generate_body_content($result["result"]);
-  $_SESSION['filtered_body_data'] = $resultBody['filtered_data'];
-  $currentTableGenerated['body'] = $resultBody['body'];
+
+  return [
+    "table_name" => $tableName,
+    "table_header" => $resultHeader['head'], 
+    "table_body" => $resultBody['body']
+  ];
 }
 
-generate_table("employees");
-
+$tableData = generate_table($_SESSION['table_name']);
+echo json_encode($tableData);
