@@ -118,7 +118,7 @@ INSERT INTO `departments` (`department_id`, `department_name`, `manager_id`, `lo
 --
 
 CREATE TABLE `employees` (
-  `employee_id` int(11) UNSIGNED NOT NULL,
+  `employee_id` int(11) PRIMARY KEY UNSIGNED AUTO_INCREMENT,
   `first_name` varchar(20) DEFAULT NULL,
   `last_name` varchar(25) NOT NULL,
   `email` text DEFAULT NULL,
