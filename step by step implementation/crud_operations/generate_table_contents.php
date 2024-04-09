@@ -1,18 +1,48 @@
 <?php
 include_once "dbOperations.php";
+include_once("table_data.php");
 
-// If the session is started when the table is not 
-// yet generated then the default table will be the employees table
-// if(session_status() == PHP_SESSION_NONE)  {
-//   session_start();
+function generate_add_entry_details($tableName) {
 
-//   if (isset($_SESSION['table_name']) == false) {
-//     $_SESSION['table_name'] = "employees";
-    
-//   }
-// } else {
-//   $_SESSION['table_name'] = $_POST['input-table-name'];
-// }
+  if(session_status() == PHP_SESSION_NONE){
+    session_start();
+  }
+
+  if (!isset($_SESSION['table_with_foreign_data'])) {
+    // terminate function, might cause an error
+    return;
+  }
+
+  // if (array_key_exists($tableName,$_SESSION['table_with_foreign_data'])) {
+
+    $column_with_sqlquery = $_SESSION['table_with_foreign_data'][$tableName];
+    $conn = getHRDBConnection();
+
+    $option_template = '<option value="%s">%s</option>';
+    $response = [];
+
+    foreach( $column_with_sqlquery as $key => $value ){
+
+      $result = executeQueryHandleError($conn, $value);
+      
+      if(!$result['status']){
+        // terminate
+        return;
+      }
+
+      $options_html_form = "";
+      $row_entry = mysqli_fetch_assoc($result['result']); 
+      
+      while( $row_entry != null ){
+        $options_html_form .= sprintf($option_template, $row_entry["value_column"],$row_entry["display_column"]);
+        $row_entry = mysqli_fetch_assoc($result['result']); 
+      }
+      $response[$key] = $options_html_form; 
+    }
+
+    return $response;
+  // }
+}
 
 function generate_body_content($table_data_raw) {
   $table_row_template = "<tr>
@@ -91,11 +121,10 @@ function generate_column_headers($column_headers) {
 
 function generate_table($tableName){
 
-  // if(session_status() == PHP_SESSION_NONE ){
-  //   session_start();
-  //   $tableName = "employees";
-  // }
-
+  if(session_status() == PHP_SESSION_NONE ){
+    session_start();
+  }
+  
   if ($tableName === "") { return; }
   
   $conn = getHRDBConnection();
@@ -115,11 +144,18 @@ function generate_table($tableName){
   $column_headers = $result["result"]->fetch_fields();  
   $resultHeader = generate_column_headers($column_headers);
   $resultBody = generate_body_content($result["result"]);
+  
+  $columnOptionsForForeignData = 
+  array_key_exists($tableName,$_SESSION['table_with_foreign_data']) && isset($_SESSION['table_with_foreign_data']) ? 
+  generate_add_entry_details($tableName) :
+  [""] ;
 
   return [
     "table_name" => $tableName,
     "table_header" => $resultHeader['head'], 
-    "table_body" => $resultBody['body']
+    "table_body" => $resultBody['body'],
+    "table_column_headers" => $resultHeader['filtered_data'],
+    "columns_options_for_foreign_data" => $columnOptionsForForeignData
   ];
 }
 
@@ -127,5 +163,7 @@ function generate_table($tableName){
 if (isset($_POST['input-table-name']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
   $tableData = generate_table($_POST['input-table-name']);
   echo json_encode($tableData);
-}  
+}
+
+
 
