@@ -11,14 +11,14 @@ function addEmployee() {
 
   $response = new Response();
 
-  $fname = mysqli_real_escape_string($conn,$_POST['lname']);
-  $response->setValidity('fName', !($fname == "") );
+  // $fname = mysqli_real_escape_string($conn,$_POST['lname']);
+  // $response->setValidity('fName', !($fname == "") );
 
-  $lname = mysqli_real_escape_string($conn,$_POST['fname']);
-  $response->setValidity('lName', !($lname == ""));
+  // $lname = mysqli_real_escape_string($conn,$_POST['fname']);
+  // $response->setValidity('lName', !($lname == ""));
 
-  $email = mysqli_real_escape_string($conn,$_POST['email']);
-  $response->setValidity('email', !($email == ""));
+  // $email = mysqli_real_escape_string($conn,$_POST['email']);
+  // $response->setValidity('email', !($email == ""));
 
   if($response->isAnyFieldInvalid()){ return; }
 

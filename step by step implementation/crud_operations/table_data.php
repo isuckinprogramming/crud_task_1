@@ -9,7 +9,7 @@ $every_departments_entry = generate_select_all_query("departments", "department_
 
 $table_with_foreign_data = [
   "locations" => [
-    "country_id" => generate_select_all_query("countries", "country_id", "country_name") 
+    "country_id" => generate_select_all_query("countries", "country_id", "CONCAT( country_name,' : ', country_id)") 
     ],
   "countries" => [
     "region_id" => $every_regions_entry
@@ -19,6 +19,7 @@ $table_with_foreign_data = [
     "department_id" => $every_departments_entry
   ],
   "job_history" => [
+    "job_id" => generate_select_all_query("jobs","job_id","job_title" ),
     "manager_id" => $every_employees_entry,
     "employee_id" => $every_employees_entry,
     "department_id" => $every_departments_entry

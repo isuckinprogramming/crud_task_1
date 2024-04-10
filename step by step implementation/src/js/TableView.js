@@ -1,6 +1,7 @@
 import './../../bootstrap/js/bootstrap.bundle.min.js';
-import './../../sweetalert/sweetalert2.all.min.js';
+// import './../../sweetalert/sweetalert2.all.min.js';
 import './../../datatables/datatables.min.js';
+// import { Swal } from './../../sweetalert/sweetalert2.all.min.js';
 // Jquery will be imported first by html file
 
 $('#table1').DataTable();
@@ -46,10 +47,10 @@ function generateAddEntryModal(columnHeaders, columnWithForeignData) {
   for (let column of columnHeaders) {
 
     if (columnWithForeignData.hasOwnProperty(column)) { 
-      htmlContentOfModal += `<label for="input-${column}"> ${column}</label><br><select name="input-${column}" id="input-${column}">${columnWithForeignData[column]}</select><br>`;
+      htmlContentOfModal += `<label for="input-${column}"> ${column}</label><br><select class="table-entry-input" name="input-${column}" id="input-${column} ">${columnWithForeignData[column]}</select><br>`;
     } else  {
       htmlContentOfModal += `<label for="input-${column}" id="lbl-input-${column}">${column}</label> <br>
-      <input name="input-${column}" type="text" id="input-${column}" class="form-control"> <br>`;
+      <input name="input-${column}" type="text" id="input-${column}" class="form-control table-entry-input"> <br>`;
     }
   }
   $('#container-for-input-label').html( htmlContentOfModal);
@@ -89,6 +90,74 @@ const generateTable = () => {
     }
   );
 }
+
+function retrieveInput( input_element ,process = "add") { 
+
+  const valueInside = input_element.value;
+  if (valueInside === "") { 
+    return { status: false, content: ""};
+  } 
+  if (process === "add") {     
+    return { status: true, content: valueInside};
+  }  
+}
+
+function addEntry() {
+  
+  const allInputChildren = document.getElementById("container-for-input-label").querySelectorAll(".table-entry-input");
+  
+  const tableData = {};
+  let isThereEmptyFields = false;
+  let numberOfEmptyColumns = 0;
+  let emptyColumns = "";
+
+
+  for (let child of allInputChildren) {
+    
+    let key = child.getAttribute('id').replace("input-", "");
+    if (child.value === "") { 
+      
+      isThereEmptyFields = true;
+      numberOfEmptyColumns += 1;
+
+      emptyColumns += `${key},`;
+      
+      continue;
+    } 
+
+    tableData[key] = child.value;
+  };
+
+  if (isThereEmptyFields) {
+  
+    const endPattern = /,$/;
+    if (numberOfEmptyColumns > 2) {
+      emptyColumns = emptyColumns.replace(endPattern, "");
+      emptyColumns = emptyColumns.replace(endPattern, ", and ");
+    } else if (numberOfEmptyColumns === 2) {
+      emptyColumns = emptyColumns.replace(endPattern, " and ");
+    } else if (numberOfEmptyColumns === 1) { 
+      emptyColumns = emptyColumns.replace(endPattern, "");
+    } 
+    
+    showAlert('error', 'Empty Fields', `The columns ${emptyColumns} are empty.\nPlease fill them to properly add an entry.`);
+    return;
+  } 
+  $.ajax( {
+    type: "POST",
+    url: "crud_operations/add_entry.php",
+    data: tableData,
+    dataType: 'JSON',
+    success: function(response){
+      const status = response.status;
+      const error = response.errorMessage;
+      if(status=="success")  showAlert('success','Success','Entry added!');
+      if(status=="error")  showAlert('error','Error',error)
+    }
+  }
+);
+}
+
 const addEmployee = () => {
     const fname = $('#txtFname').val();
     const lname =  $('#txtLname').val();
@@ -149,7 +218,7 @@ $(document).on(
 $(document).on(
   'click',
   '#btnSave', 
-  () =>{ addEmployee();}
+  () =>{ addEntry();}
 );
 
 // HTML MODIFICATIONS 
