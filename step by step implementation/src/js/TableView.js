@@ -56,7 +56,11 @@ function generateAddEntryModal(columnHeaders, columnWithForeignData) {
       <input name="input-${column}" type="text" id="input-${column}" class="form-control table-entry-input"> <br>`;
     }
   }
-  $('#container-for-input-label').html( htmlContentOfModal);
+  $('#container-for-input-label').html(htmlContentOfModal);
+  // document.getElementById("edit-input-container").html = document.getElementById('container-for-input-label').html;
+
+  $('#edit-input-container').html(htmlContentOfModal);
+  
 }
 
 const generateTable = () => { 
@@ -86,7 +90,9 @@ const generateTable = () => {
           response.columns_options_for_foreign_data
         );
         
-        // $('#table1').DataTable();
+        // $('#edit-input-container').html($("#container-for-input-label").html())
+
+
         $('#table1').DataTable();
       },
       error: function( xhr, status, error ){ 
@@ -96,6 +102,10 @@ const generateTable = () => {
     }
   );
 
+
+}
+
+function updateEntry() { 
 
 }
 
@@ -205,6 +215,14 @@ const addEmployee = () => {
     );
 }
 // EVENTS
+
+$(document).on(
+  'click',
+  '.btnEdit', 
+  () => {
+    $('#modalEdit').modal('show'); 
+  } 
+);
 $(document).on(
   'click',
   '#btnAdd', 
@@ -213,6 +231,12 @@ $(document).on(
   } 
 );
 
+
+$(document).on(
+  "click",
+  "#btnUpdate",
+  updateEntry
+);
 $(document).on(
   "click",
   "#submitChangeTable",
