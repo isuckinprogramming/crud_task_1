@@ -47,19 +47,25 @@ function generateLabelAndInput(columnHeaders){
 function generateAddEntryModal(columnHeaders, columnWithForeignData) { 
   
   let htmlContentOfModal = "";
+  let htmlContentOdEditModal = "";
+
   for (let column of columnHeaders) {
 
     if (columnWithForeignData.hasOwnProperty(column)) { 
       htmlContentOfModal += `<label for="input-${column}"> ${column}</label><br><select class="table-entry-input" name="input-${column}" id="input-${column} ">${columnWithForeignData[column]}</select><br>`;
-    } else  {
+      htmlContentOdEditModal += `<label for="edit-${column}"> ${column}</label><br><select class="table-edit-input" name="edit-${column}" id="edit-${column} ">${columnWithForeignData[column]}</select><br>`;
+    } else {
       htmlContentOfModal += `<label for="input-${column}" id="lbl-input-${column}">${column}</label> <br>
       <input name="input-${column}" type="text" id="input-${column}" class="form-control table-entry-input"> <br>`;
+
+      htmlContentOdEditModal += `<label for="edit-${column}" id="lbl-edit-${column}">${column}</label> <br>
+      <input name="edit-${column}" type="text" id="edit-${column}" class="form-control table-edit-input"> <br>`;
     }
   }
   $('#container-for-input-label').html(htmlContentOfModal);
   // document.getElementById("edit-input-container").html = document.getElementById('container-for-input-label').html;
 
-  $('#edit-input-container').html(htmlContentOfModal);
+  $('#edit-input-container').html(htmlContentOdEditModal);
   
 }
 
@@ -105,8 +111,67 @@ const generateTable = () => {
 
 }
 
-function updateEntry() { 
+function updateEntry(updateId, updateValue) { 
+  const allInputChildren = document.getElementById("edit-input-container").querySelectorAll(".table-edit-input");
+  
+  const tableData = {};
+  let isThereEmptyFields = false;
+  let numberOfEmptyColumns = 0;
+  let emptyColumns = "";
 
+
+  for (let child of allInputChildren) {
+    
+    let key = child.getAttribute('id').replace("edit-", "");
+    if (child.value === "") { 
+      
+      isThereEmptyFields = true;
+      numberOfEmptyColumns += 1;
+
+      emptyColumns += `${key},`;
+      
+      continue;
+    } 
+
+    tableData[key] = child.value;
+  };
+
+  if (isThereEmptyFields) {
+  
+    const endPattern = /,$/;
+    if (numberOfEmptyColumns > 2) {
+      emptyColumns = emptyColumns.replace(endPattern, "");
+      emptyColumns = emptyColumns.replace(endPattern, ", and ");
+    } else if (numberOfEmptyColumns === 2) {
+      emptyColumns = emptyColumns.replace(endPattern, " and ");
+    } else if (numberOfEmptyColumns === 1) { 
+      emptyColumns = emptyColumns.replace(endPattern, "");
+    } 
+    
+    showAlert('error', 'Empty Fields', `The columns ${emptyColumns} are empty.\nPlease fill them to properly update an entry.`);
+    return;
+  } 
+  const tableName = $('#display-table-name').text();
+
+  const post_data = {
+    table_name: tableName,
+    data: tableData,
+    update_column: updateId,
+    update_column_value: updateValue
+  };
+
+  $.ajax({
+    type: "POST",
+    url: "./../../crud_operations/update_entry.php",
+    data: post_data,
+    dataType: 'JSON',
+    success: function(response){
+      const status = response.status;
+      const error = response.errorMessage;
+      if(status=="success")  showAlert('success','Success','Entry UPDATED!');
+      if(status=="error")  showAlert('error','Error',error)
+    }
+  });
 }
 
 function addEntry() {
@@ -215,13 +280,19 @@ const addEmployee = () => {
     );
 }
 // EVENTS
-
+var currentUpdateKey = "";
+var currentUpdateValue = "";
 $(document).on(
   'click',
   '.btnEdit', 
-  () => {
+  function () { 
+
+    // console.log(this);
+    currentUpdateKey = this.getAttribute("data-primary-key");
+    currentUpdateValue = this.getAttribute("data-primary-value");
     $('#modalEdit').modal('show'); 
-  } 
+
+  }
 );
 $(document).on(
   'click',
@@ -235,7 +306,7 @@ $(document).on(
 $(document).on(
   "click",
   "#btnUpdate",
-  updateEntry
+  function () { updateEntry(currentUpdateKey, currentUpdateValue); }
 );
 $(document).on(
   "click",

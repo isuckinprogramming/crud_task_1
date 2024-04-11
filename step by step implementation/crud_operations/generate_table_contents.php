@@ -44,11 +44,12 @@ function generate_add_entry_details($tableName) {
   // }
 }
 
-function generate_body_content($table_data_raw) {
+function generate_body_content($table_data_raw, $update_id) {
   $table_row_template = "<tr>
             <td>
               <button
-                data-primary-key=\"%s\"
+                data-primary-key=\"$update_id\"
+                data-primary-value=\"%s\"
                 class=\"btn btn-warning btn-sm btnEdit\"
                 type=\"button\">
                 EDIT
@@ -56,7 +57,9 @@ function generate_body_content($table_data_raw) {
               <button 
                 class=\"btn btn-danger btn-sm btnDelete\" 
                 type=\"button\"
-                data-primary-key=\"%s\">
+                data-primary-key=\"$update_id\"
+                data-primary-value=\"%s\"
+                >
                 DELETE
               </button>
             </td>
@@ -143,7 +146,7 @@ function generate_table($tableName){
 
   $column_headers = $result["result"]->fetch_fields();  
   $resultHeader = generate_column_headers($column_headers);
-  $resultBody = generate_body_content($result["result"]);
+  $resultBody = generate_body_content($result["result"], $column_headers[0]->name);
   
   $columnOptionsForForeignData = 
   array_key_exists($tableName,$_SESSION['table_with_foreign_data']) && isset($_SESSION['table_with_foreign_data']) ? 
