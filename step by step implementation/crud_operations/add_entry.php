@@ -50,3 +50,7 @@ function addEntry()
 }
 
 addEntry();
+
+// I think I should put the validations here before adding an entry
+// Like I can skip the log-in process then proceed to add_entry
+// aside from creating an add entry, content and user validation should be important 

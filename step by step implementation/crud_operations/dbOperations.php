@@ -36,3 +36,5 @@ function executeQueryHandleError( mysqli $conn, $sql)  {
     "mysqlQuery" => $sql
   ];
 }
+
+// I think I should put the single database connection to be used for all the query

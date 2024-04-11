@@ -24,3 +24,6 @@ $response = ($result) ?
 ];
 
 echo json_encode($response);
+
+// Yeahh there should be validation here before deleting an entry
+

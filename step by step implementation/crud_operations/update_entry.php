@@ -25,14 +25,6 @@ $update_values = preg_replace( $regPattern, "",$update_values);
 $sqlQuery = "UPDATE " . $_POST['table_name'] . " SET " . $update_values . " WHERE " . $_POST['update_column'] . "='".$_POST['update_column_value']."';";
 
 
-
-// if (session_status() == PHP_SESSION_NONE) { session_start(); }
-
-// if(!isset($_SESSION['hr_db_conn'])){
-//   $_SESSION['hr_db_conn'] = getHRDBConnection();
-// }
-//   $_SESSION['hr_db_conn'] = getHRDBConnection();
-
 $conn = getHRDBConnection();
 
 $result = $conn->query($sqlQuery);
@@ -47,3 +39,14 @@ $response = ($result) ?
 ];
 
 echo json_encode($response);
+// All checks should be done here
+function data_validation()
+{
+
+}
+
+// Then after the checks the entry can be updated
+function update_entry()
+{
+
+}
