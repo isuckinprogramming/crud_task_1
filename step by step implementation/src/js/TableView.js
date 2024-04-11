@@ -279,7 +279,46 @@ const addEmployee = () => {
       }
     );
 }
+
+function deleteEntry(key, value) { 
+
+  const tableName = $('#display-table-name').text();
+
+  const post_data = {
+    table_name: tableName,
+    delete_column: key,
+    delete_column_value: value
+  };
+
+  $.ajax({
+    type: "POST",
+    url: "./../../crud_operations/delete_entry.php",
+    data: post_data,
+    dataType: 'JSON',
+    success: function(response){
+      const status = response.status;
+      const error = response.errorMessage;
+      if(status=="success")  showAlert('success','Success','Entry DELETED!');
+      if(status=="error")  showAlert('error','Error',error)
+    }
+  });
+}
 // EVENTS
+
+$(document).on(
+  "click",
+  "#submitChangeTable",
+  () => { generateTable() }
+);
+$(document).on(
+  'click',
+  '#btnAdd', 
+  () => {
+    $('#modalAdd').modal('show'); 
+  } 
+);
+
+// CRUD TRIGGERS
 var currentUpdateKey = "";
 var currentUpdateValue = "";
 $(document).on(
@@ -296,22 +335,18 @@ $(document).on(
 );
 $(document).on(
   'click',
-  '#btnAdd', 
-  () => {
-    $('#modalAdd').modal('show'); 
-  } 
-);
-
-
+  '.btnDelete',
+  function () { 
+    deleteEntry(
+      this.getAttribute("data-primary-key"),
+      this.getAttribute("data-primary-value")
+    );
+  }
+)
 $(document).on(
   "click",
   "#btnUpdate",
   function () { updateEntry(currentUpdateKey, currentUpdateValue); }
-);
-$(document).on(
-  "click",
-  "#submitChangeTable",
-  () => { generateTable() }
 );
 $(document).on(
   'click',
