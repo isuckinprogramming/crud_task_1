@@ -6,7 +6,7 @@
 -- Generation Time: Mar 16, 2024 at 08:28 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
-CREATE DATABASE IF NOT EXISTS "hr1";
+CREATE DATABASE IF NOT EXISTS hr1;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -118,7 +118,7 @@ INSERT INTO `departments` (`department_id`, `department_name`, `manager_id`, `lo
 --
 
 CREATE TABLE `employees` (
-  `employee_id` int(11) PRIMARY KEY UNSIGNED AUTO_INCREMENT,
+  `employee_id` int(11) PRIMARY KEY AUTO_INCREMENT,
   `first_name` varchar(20) DEFAULT NULL,
   `last_name` varchar(25) NOT NULL,
   `email` text DEFAULT NULL,
