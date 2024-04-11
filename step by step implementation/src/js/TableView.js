@@ -4,7 +4,7 @@ import './../../datatables/datatables.min.js';
 // import { Swal } from './../../sweetalert/sweetalert2.all.min.js';
 // Jquery will be imported first by html file
 
-$('#table1').DataTable();
+
 let currentTableInView = {};
 
 function showAlert(icon, title, content){
@@ -16,12 +16,15 @@ function showAlert(icon, title, content){
       allowEscapeKey: false,
       allowOutsideClick: false,
     }).then((result) => {
-      if (result.isConfirmed) { 
-        if(icon=='success') 
-        location.reload(true); //reload the page
+      if (result.isConfirmed) {
+        if (icon == 'success') {
+       
+          //  originally the page would be reloaded but it would
+          //  create quite a problem if it did the page
+          // location.reload(true); 
+        }
       }
-      }
-    );
+    });
 }
 
 function createFormLabelAndInput(name, type = "text"){
@@ -68,7 +71,7 @@ const generateTable = () => {
       dataType: 'JSON',
       success: function (response) {
         
-        console.log(response);
+        // console.log(response);
 
         $('#display-table-name').html(response.table_name);
 
@@ -82,6 +85,9 @@ const generateTable = () => {
           response.table_column_headers,
           response.columns_options_for_foreign_data
         );
+        
+        // $('#table1').DataTable();
+        $('#table1').DataTable();
       },
       error: function( xhr, status, error ){ 
 
@@ -89,17 +95,8 @@ const generateTable = () => {
       } 
     }
   );
-}
 
-function retrieveInput( input_element ,process = "add") { 
 
-  const valueInside = input_element.value;
-  if (valueInside === "") { 
-    return { status: false, content: ""};
-  } 
-  if (process === "add") {     
-    return { status: true, content: valueInside};
-  }  
 }
 
 function addEntry() {
@@ -143,10 +140,17 @@ function addEntry() {
     showAlert('error', 'Empty Fields', `The columns ${emptyColumns} are empty.\nPlease fill them to properly add an entry.`);
     return;
   } 
-  $.ajax( {
+  const tableName = $('#display-table-name').text();
+
+  const post_data = {
+    table_name: tableName
+    , data: tableData
+  };
+
+  $.ajax({
     type: "POST",
-    url: "crud_operations/add_entry.php",
-    data: tableData,
+    url: "./../../crud_operations/add_entry.php",
+    data: post_data,
     dataType: 'JSON',
     success: function(response){
       const status = response.status;
@@ -154,8 +158,7 @@ function addEntry() {
       if(status=="success")  showAlert('success','Success','Entry added!');
       if(status=="error")  showAlert('error','Error',error)
     }
-  }
-);
+  });
 }
 
 const addEmployee = () => {
