@@ -51,7 +51,8 @@ function generate_body_content($table_data_raw, $update_id) {
                 data-primary-key=\"$update_id\"
                 data-primary-value=\"%s\"
                 class=\"btn btn-warning btn-sm btnEdit\"
-                type=\"button\">
+                type=\"button\"
+                >
                 EDIT
               </button>
               <button 
