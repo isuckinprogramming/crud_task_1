@@ -13,42 +13,39 @@ function generate_add_entry_details($tableName) {
     return;
   }
 
-  // if (array_key_exists($tableName,$_SESSION['table_with_foreign_data'])) {
 
-    $column_with_sqlquery = $_SESSION['table_with_foreign_data'][$tableName];
-    $conn = getHRDBConnection();
+  $column_with_sqlquery = $_SESSION['table_with_foreign_data'][$tableName];
 
-    $option_template = '<option value="%s">%s</option>';
-    $response = [];
+  $option_template = '<option value="%s">%s</option>';
+  $response = [];
 
-    foreach( $column_with_sqlquery as $key => $value ){
+  foreach( $column_with_sqlquery as $key => $value ){
 
-      $result = executeQueryHandleError($conn, $value);
-      
-      if(!$result['status']){
-        // terminate
-        return;
-      }
-
-      $options_html_form = "";
-      $row_entry = mysqli_fetch_assoc($result['result']); 
-      
-      while( $row_entry != null ){
-        $options_html_form .= sprintf($option_template, $row_entry["value_column"],$row_entry["display_column"]);
-        $row_entry = mysqli_fetch_assoc($result['result']); 
-      }
-      $response[$key] = $options_html_form; 
+    $result = DataBaseOperations::execute_and_return_error_msg($value);
+    
+    if(!$result['status']){
+      // terminate because of error in mysql query
+      return;
     }
 
-    return $response;
-  // }
+    $options_html_form = "";
+    $row_entry = mysqli_fetch_assoc($result['result']); 
+    
+    while( $row_entry != null ){
+      $options_html_form .= sprintf($option_template, $row_entry["value_column"],$row_entry["display_column"]);
+      $row_entry = mysqli_fetch_assoc($result['result']); 
+    }
+    $response[$key] = $options_html_form; 
+  }
+
+  return $response;
 }
 
-function generate_body_content($table_data_raw, $update_id) {
+function generate_body_content($table_data_raw, $primary_key_id) {
   $table_row_template = "<tr>
             <td>
               <button
-                data-primary-key=\"$update_id\"
+                data-primary-key=\"$primary_key_id\"
                 data-primary-value=\"%s\"
                 class=\"btn btn-warning btn-sm btnEdit\"
                 type=\"button\"
@@ -58,7 +55,7 @@ function generate_body_content($table_data_raw, $update_id) {
               <button 
                 class=\"btn btn-danger btn-sm btnDelete\" 
                 type=\"button\"
-                data-primary-key=\"$update_id\"
+                data-primary-key=\"$primary_key_id\"
                 data-primary-value=\"%s\"
                 >
                 DELETE
@@ -66,6 +63,7 @@ function generate_body_content($table_data_raw, $update_id) {
             </td>
             %s
           </tr>";
+
   $table_data_template = "<td>%s</td>\n";
 
   $table_Body_HTML = "";
@@ -73,6 +71,7 @@ function generate_body_content($table_data_raw, $update_id) {
 
   $filtered_row_data = [];
   $all_filtered_row_data = [];
+  
   while ($row = $table_data_raw->fetch_row()) { 
 
     foreach($row as $table_data){

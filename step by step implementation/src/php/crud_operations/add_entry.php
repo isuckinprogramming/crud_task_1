@@ -6,7 +6,7 @@ $conn = getHRDBConnection();
 
 function addEntry() 
 {
-  if( !$_SERVER['REQUEST_METHOD'] == 'POST' ) {
+  if( $_SERVER['REQUEST_METHOD'] !== 'POST' ) {
     return;
   }
 
@@ -31,25 +31,30 @@ function addEntry()
   
 
   $mysql_insert_template = " INSERT INTO %s ( %s ) VALUES ( %s ); ";
-  $sqlQuery = sprintf($mysql_insert_template, $_POST['table_name'], $columns, $values);
 
-  $conn = getHRDBConnection();
+  $tableName = DataBaseOperations::convert_to_mysqli_safe_string($_POST['table_name']);
+  $columns = DataBaseOperations::convert_to_mysqli_safe_string( $columns);
+  $values = DataBaseOperations::convert_to_mysqli_safe_string( $values);
 
-  $result = $conn->query($sqlQuery);
+  $sqlQuery = sprintf($mysql_insert_template, $tableName, $columns, $values);
+  $result = DataBaseOperations::execute_and_return_error_msg($sqlQuery);
 
-  $response = ($result) ?
+  $response = ($result['status']) ?
   [
     "status" => "success"
   ] :
   [
-    "errorMessage" => "Error Number: " . $conn->connect_errno . '\n' . $conn->error . '\n' . $sqlQuery,
+    "errorMessage" => "Error Number: " . $result['errorNo'] . '\n' . $result['errorMessage'] . '\n' . $result['mysqlQuery'],
     "status" => "error"
   ];
   
   echo json_encode($response);
 }
 
-addEntry();
+$addEntryConditions = $_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['operation']) && $_POST['operation'] === "add_entry";
+if ($addEntryConditions) {
+  addEntry();
+}
 
 // I think I should put the validations here before adding an entry
 // Like I can skip the log-in process then proceed to add_entry

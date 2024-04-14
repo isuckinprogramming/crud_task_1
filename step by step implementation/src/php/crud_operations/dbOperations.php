@@ -108,8 +108,17 @@ static function is_user_logged_in()
   return false;
 }
 
-function convert_to_mysqli_safe_string($sql)
+static function convert_to_mysqli_safe_string($sql)
 {
+    
+  if (!DataBaseOperations::$is_database_connection_created) {
+
+    if (session_status() == PHP_SESSION_NONE) {
+      session_start();  
+    }
+
+    $_SESSION['db_connection'] = DataBaseOperations::create_db_connection();
+  }
   $converted = mysqli_real_escape_string($_SESSION['db_connection'], $sql);  
 
   return ($converted == "") ? false:$converted;  

@@ -1,18 +1,19 @@
 <?php
 require_once('dbOperations.php');
-require_once('response.php');
 
 $conn = getHRDBConnection();
 
-if( !$_SERVER['REQUEST_METHOD'] == 'POST' ) {
+if( $_SERVER['REQUEST_METHOD'] !== 'POST' ) {
   return;
 }
 
-$sqlQuery = "DELETE FROM " . $_POST['table_name'] . " WHERE " . $_POST['delete_column'] . "='".$_POST['delete_column_value']."';";
+$tableName = DataBaseOperations::convert_to_mysqli_safe_string($_POST['table_name']);
+$deleteColumn = DataBaseOperations::convert_to_mysqli_safe_string($_POST['delete_column']);
+$deleteColumnValue = DataBaseOperations::convert_to_mysqli_safe_string($_POST['delete_column_value']);
 
 
-$conn = getHRDBConnection();
-$result = $conn->query($sqlQuery);
+$sqlQuery = "DELETE FROM ". $tableName . " WHERE " . $deleteColumn . "='" . $deleteColumnValue ."';"; 
+$result = DataBaseOperations::execute_and_return_error_msg($sqlQuery);
 
 $response = ($result) ?
 [

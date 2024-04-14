@@ -6,7 +6,7 @@ function generate_select_all_query($table_name, $value_column, $display_column){
 $every_employees_entry = generate_select_all_query("employees", "employee_id", "CONCAT(first_name,' ', last_name)");
 $every_regions_entry = generate_select_all_query("regions", "region_id","region_name");
 $every_departments_entry = generate_select_all_query("departments", "department_id","department_name");
-
+$every_job_entry = generate_select_all_query("jobs", "job_id", "job_title");
 $table_with_foreign_data = [
   "locations" => [
     "country_id" => generate_select_all_query("countries", "country_id", "CONCAT( country_name,' : ', country_id)") 
@@ -15,11 +15,12 @@ $table_with_foreign_data = [
     "region_id" => $every_regions_entry
   ],
   "employees" => [
+    "job_id" => $every_job_entry,
     "manager_id" => $every_employees_entry,
     "department_id" => $every_departments_entry
   ],
   "job_history" => [
-    "job_id" => generate_select_all_query("jobs","job_id","job_title" ),
+    "job_id" => $every_job_entry,
     "manager_id" => $every_employees_entry,
     "employee_id" => $every_employees_entry,
     "department_id" => $every_departments_entry
