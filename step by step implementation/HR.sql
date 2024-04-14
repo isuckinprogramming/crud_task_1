@@ -421,8 +421,8 @@ ALTER TABLE `departments`
 --
 -- Indexes for table `employees`
 --
-ALTER TABLE `employees`
-  ADD PRIMARY KEY (`employee_id`);
+-- ALTER TABLE `employees`
+--   ADD PRIMARY KEY (`employee_id`);
 
 --
 -- Indexes for table `jobs`
