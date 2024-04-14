@@ -1,3 +1,5 @@
+
+const logInActionLink = "/step by step implementation/src/php/LogIn.php";
 $(document).on(
   "click",
   "#login-trigger",
@@ -8,7 +10,7 @@ $(document).on(
     
     $.ajax({
       type: "POST",
-      url:"./src/php/LogIn.php",
+      url: logInActionLink,
       dataType: "json",
       data: {
         user_email: input_user_email, 

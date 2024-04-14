@@ -1,8 +1,8 @@
-import './../../bootstrap/js/bootstrap.bundle.min.js';
-// import './../../sweetalert/sweetalert2.all.min.js';
-import './../../datatables/datatables.min.js';
-// import { Swal } from './../../sweetalert/sweetalert2.all.min.js';
-// Jquery will be imported first by html file
+// import './../../bootstrap/js/bootstrap.bundle.min.js
+import './../../../node_modules/bootstrap/dist/js/bootstrap.bundle.js';
+
+import './../../../node_modules/datatables.net/js/dataTables.min.js';
+
 
 function showAlert(icon, title, content){
     Swal.fire({
@@ -23,6 +23,13 @@ function showAlert(icon, title, content){
       }
     });
 }
+
+
+const deleteEntryPhpActionLink = './../php/crud_operations/delete_entry.php';
+const addEntryPhpActionLink = './../php/crud_operations/add_entry.php';
+const updateEntryActionLink = './../php/crud_operations/update_entry.php';
+const generateTableActionLink = './../php/crud_operations/generate_table_contents.php';
+
 
 function generateAddEntryModal(columnHeaders, columnWithForeignData) { 
   
@@ -54,7 +61,7 @@ const generateTable = () => {
   $.ajax(
     {
       type: "POST",
-      url: "./../../crud_operations/generate_table_contents.php",
+      url: generateTableActionLink,
       data: {
         "input-table-name": tableName,
       },
@@ -142,7 +149,7 @@ function updateEntry(updateId, updateValue) {
 
   $.ajax({
     type: "POST",
-    url: "./../../crud_operations/update_entry.php",
+    url: updateEntryActionLink,
     data: post_data,
     dataType: 'JSON',
     success: function(response){
@@ -204,7 +211,7 @@ function addEntry() {
 
   $.ajax({
     type: "POST",
-    url: "./../../crud_operations/add_entry.php",
+    url: addEntryPhpActionLink,
     data: post_data,
     dataType: 'JSON',
     success: function(response){
@@ -228,7 +235,7 @@ function deleteEntry(key, value) {
 
   $.ajax({
     type: "POST",
-    url: "./../../crud_operations/delete_entry.php",
+    url: deleteEntryPhpActionLink,
     data: post_data,
     dataType: 'JSON',
     success: function(response){
@@ -255,16 +262,16 @@ $(document).on(
 );
 
 // CRUD TRIGGERS
-var currentUpdateKey = "";
-var currentUpdateValue = "";
+var currentEntryActionKey = "";
+var currentEntryActionValue = "";
 $(document).on(
   'click',
   '.btnEdit', 
   function () { 
 
     // console.log(this);
-    currentUpdateKey = this.getAttribute("data-primary-key");
-    currentUpdateValue = this.getAttribute("data-primary-value");
+    currentEntryActionKey = this.getAttribute("data-primary-key");
+    currentEntryActionValue = this.getAttribute("data-primary-value");
     $('#modalEdit').modal('show'); 
 
   }
@@ -282,7 +289,7 @@ $(document).on(
 $(document).on(
   "click",
   "#btnUpdate",
-  function () { updateEntry(currentUpdateKey, currentUpdateValue); }
+  function () { updateEntry(currentEntryActionKey, currentEntryActionValue); }
 );
 $(document).on(
   'click',
