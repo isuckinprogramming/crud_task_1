@@ -2,9 +2,7 @@
 require_once('dbOperations.php');
 require_once('response.php');
 
-$conn = getHRDBConnection();
-
-function addEntry() 
+function addEntry( $add_entry_data, $table_name) 
 {
   if( $_SERVER['REQUEST_METHOD'] !== 'POST' ) {
     return;
@@ -15,13 +13,13 @@ function addEntry()
   $template = "%s, ";
 
   $columnCount = 0;
-  $data = $_POST['data'];
+  // $post_data = $_POST['post_data'];
   
-  foreach ($data as $key => $value) {
+  foreach ($add_entry_data as $key => $value) {
     $columnCount += 1;
 
-    $columns .= sprintf($template, $key);
-    $values .= sprintf($template, "'". $value ."'" );
+    $columns .= sprintf($template, DataBaseOperations::convert_to_mysqli_safe_string($key));
+    $values .= sprintf($template, "'". DataBaseOperations::convert_to_mysqli_safe_string($value) ."'" );
   }
   $regPattern = '/,(?=[^,]*$)/';
   
@@ -29,13 +27,10 @@ function addEntry()
   $values = preg_replace( $regPattern, "",$values);
 
   
-
   $mysql_insert_template = " INSERT INTO %s ( %s ) VALUES ( %s ); ";
 
-  $tableName = DataBaseOperations::convert_to_mysqli_safe_string($_POST['table_name']);
-  $columns = DataBaseOperations::convert_to_mysqli_safe_string( $columns);
-  $values = DataBaseOperations::convert_to_mysqli_safe_string( $values);
-
+  $tableName = DataBaseOperations::convert_to_mysqli_safe_string($table_name);
+  
   $sqlQuery = sprintf($mysql_insert_template, $tableName, $columns, $values);
   $result = DataBaseOperations::execute_and_return_error_msg($sqlQuery);
 
@@ -48,12 +43,24 @@ function addEntry()
     "status" => "error"
   ];
   
-  echo json_encode($response);
+  return $response;
 }
 
 $addEntryConditions = $_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['operation']) && $_POST['operation'] === "add_entry";
 if ($addEntryConditions) {
-  addEntry();
+
+
+  $tableName = $_POST['post_data']['table_name'];
+  $entryData = $_POST['post_data']['data'];
+  
+  if ($tableName == "employees") {
+
+    $entryData["employee_id"] = rand(1,10000);
+  }
+
+  $response = addEntry($entryData, $tableName );
+  
+  echo json_encode($response);
 }
 
 // I think I should put the validations here before adding an entry
