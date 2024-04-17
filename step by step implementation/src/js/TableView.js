@@ -5,23 +5,24 @@ import './../../../node_modules/datatables.net/js/dataTables.min.js';
 
 
 function showAlert(icon, title, content){
-    Swal.fire({
-      icon: icon,
-      title: title,
-      text: content,
-      confirmButtonText: 'CONTINUE',
-      allowEscapeKey: false,
-      allowOutsideClick: false,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        if (icon == 'success') {
-       
-          //  originally the page would be reloaded but it would
-          //  create quite a problem if it did the page
-          // location.reload(true); 
-        }
+    
+  Swal.fire({
+    icon: icon,
+    title: title,
+    text: content,
+    confirmButtonText: 'CONTINUE',
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      if (icon == 'success') {
+      
+        //  originally the page would be reloaded but it would
+        //  create quite a problem if it did the page
+        // location.reload(true); 
       }
-    });
+    }
+  });
 }
 
 
@@ -29,6 +30,35 @@ const deleteEntryPhpActionLink = './../php/crud_operations/delete_entry.php';
 const addEntryPhpActionLink = './../php/crud_operations/add_entry.php';
 const updateEntryActionLink = './../php/crud_operations/update_entry.php';
 const generateTableActionLink = './../php/crud_operations/generate_table_contents.php';
+
+function retrieveKeyValueDataFromInputs(idOfContainer,classOfInput,prefixOfInputId = "input-" ) { 
+  const allInputChildren = document.getElementById(idOfContainer).querySelectorAll("." + classOfInput);
+
+  const returnData = {
+    data: {},
+    isThereEmptyFields: false,
+    emptyColumns: "",
+    numberOfEmptyColumns : 0
+  }
+
+  for (let child of allInputChildren) {
+    
+    let key = child.getAttribute('id').replace(prefixOfInputId, "");
+    if (child.value === "") { 
+      
+      returnData.isThereEmptyFields = true;
+      returnData.numberOfEmptyColumns += 1;
+
+      returnData.emptyColumns += `${key},`;
+      
+      continue;
+    } 
+
+    returnData.data[key] = child.value;
+  };
+
+  return returnData;
+}
 
 
 function generateAddEntryModal(columnHeaders, columnWithForeignData) { 
@@ -99,50 +129,20 @@ const generateTable = () => {
 }
 
 function updateEntry(updateId, updateValue) { 
-  const allInputChildren = document.getElementById("edit-input-container").querySelectorAll(".table-edit-input");
-  
-  const tableData = {};
-  let isThereEmptyFields = false;
-  let numberOfEmptyColumns = 0;
-  let emptyColumns = "";
 
 
-  for (let child of allInputChildren) {
-    
-    let key = child.getAttribute('id').replace("edit-", "");
-    if (child.value === "") { 
-      
-      isThereEmptyFields = true;
-      numberOfEmptyColumns += 1;
+  const dataFromInputs = retrieveKeyValueDataFromInputs("edit-input-container","table-edit-input","edit-")
 
-      emptyColumns += `${key},`;
-      
-      continue;
-    } 
-
-    tableData[key] = child.value;
-  };
-
-  if (isThereEmptyFields) {
-  
-    const endPattern = /,$/;
-    if (numberOfEmptyColumns > 2) {
-      emptyColumns = emptyColumns.replace(endPattern, "");
-      emptyColumns = emptyColumns.replace(endPattern, ", and ");
-    } else if (numberOfEmptyColumns === 2) {
-      emptyColumns = emptyColumns.replace(endPattern, " and ");
-    } else if (numberOfEmptyColumns === 1) { 
-      emptyColumns = emptyColumns.replace(endPattern, "");
-    } 
-    
-    showAlert('error', 'Empty Fields', `The columns ${emptyColumns} are empty.\nPlease fill them to properly update an entry.`);
+  if (dataFromInputs.isThereEmptyFields) {
+    displayErrorMessageForEmptyInputs(dataFromInputs.emptyColumns, dataFromInputs.numberOfEmptyColumns);
     return;
-  } 
+  }
+
   const tableName = $('#display-table-name').text();
 
   const post_data = {
     table_name: tableName,
-    data: tableData,
+    data: dataFromInputs.data,
     update_column: updateId,
     update_column_value: updateValue
   };
@@ -153,66 +153,57 @@ function updateEntry(updateId, updateValue) {
     data: post_data,
     dataType: 'JSON',
     success: function(response){
+      
       const status = response.status;
       const error = response.errorMessage;
-      if(status=="success")  showAlert('success','Success','Entry UPDATED!');
+      
+      if (status == "success") showAlert('success', 'Success', 'Entry UPDATED!');
       if(status=="error")  showAlert('error','Error',error)
     }
   });
 }
 
-function addEntry() {
+function displayErrorMessageForEmptyInputs( emptyColumnsString, numberOfEmptyColumns ) { 
   
-  const allInputChildren = document.getElementById("container-for-input-label").querySelectorAll(".table-entry-input");
+  let errorMessage = emptyColumnsString;
+  const endPattern = /,$/;
+  let replacement = "";
   
-  const tableData = {};
-  let isThereEmptyFields = false;
-  let numberOfEmptyColumns = 0;
-  let emptyColumns = "";
-
-
-  for (let child of allInputChildren) {
-    
-    let key = child.getAttribute('id').replace("input-", "");
-    if (child.value === "") { 
-      
-      isThereEmptyFields = true;
-      numberOfEmptyColumns += 1;
-
-      emptyColumns += `${key},`;
-      
-      continue;
-    } 
-
-    tableData[key] = child.value;
-  };
-
-  if (isThereEmptyFields) {
-  
-    const endPattern = /,$/;
-    if (numberOfEmptyColumns > 2) {
-      emptyColumns = emptyColumns.replace(endPattern, "");
-      emptyColumns = emptyColumns.replace(endPattern, ", and ");
-    } else if (numberOfEmptyColumns === 2) {
-      emptyColumns = emptyColumns.replace(endPattern, " and ");
-    } else if (numberOfEmptyColumns === 1) { 
-      emptyColumns = emptyColumns.replace(endPattern, "");
-    } 
-    
-    showAlert('error', 'Empty Fields', `The columns ${emptyColumns} are empty.\nPlease fill them to properly add an entry.`);
-    return;
+  if (numberOfEmptyColumns > 2) {
+    errorMessage = errorMessage.replace(endPattern, "");
+    replacement = ", and ";
+  } else if (numberOfEmptyColumns === 2) {
+    replacement = " and ";
+  } else if (numberOfEmptyColumns === 1) { 
+    replacement = "";
   } 
+
+  errorMessage = errorMessage.replace(endPattern, replacement);
+  showAlert('error', 'Empty Fields', `The columns ${errorMessage} are empty.\nPlease fill them to properly add an entry.`);
+}
+
+function addEntry() {
+
+  const dataFromInputs = retrieveKeyValueDataFromInputs("container-for-input-label","table-entry-input")
+
+  if (dataFromInputs.isThereEmptyFields) {
+    displayErrorMessageForEmptyInputs(dataFromInputs.emptyColumns, dataFromInputs.numberOfEmptyColumns);
+    return;
+  }
+
   const tableName = $('#display-table-name').text();
 
   const post_data = {
-    table_name: tableName
-    , data: tableData
+    table_name: tableName,
+    data: dataFromInputs.data
   };
 
   $.ajax({
     type: "POST",
     url: addEntryPhpActionLink,
-    data: post_data,
+    data: {
+      post_data: post_data,
+    operation: "add_entry"},
     dataType: 'JSON',
     success: function(response){
       const status = response.status;
@@ -296,6 +287,3 @@ $(document).on(
   '#btnSave', 
   () =>{ addEntry();}
 );
-
-// HTML MODIFICATIONS 
-// $('#container-for-input-label').html( generateLabelAndInput());
