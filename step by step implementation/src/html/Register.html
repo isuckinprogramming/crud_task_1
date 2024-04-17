@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register New User!</title>
+
+
+  <link rel="stylesheet" href="./../../../node_modules/bootstrap/dist/css/bootstrap.css">
+
+  <script src="./../../../node_modules/jquery/dist/jquery.js"></script>
+  <script src="./../../../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+
+  <script defer="true" src="./../js/register.js"></script>
+</head>
+<body>
+
+  <div class="modal-body" id="container-for-input-label">
+    
+    <!-- <label for="input-employee_id" id="lbl-input-employee_id">Employee id</label> <br>
+    <input name="input-employee_id" type="text" id="input-employee_id" class="form-control table-entry-input"> <br> -->
+
+    <label for="input-first_name" id="lbl-input-first_name">First Name</label> <br>
+    <input name="input-first_name" type="text" id="input-first_name" class="form-control table-entry-input"> <br>
+
+    <label for="input-last_name" id="lbl-input-last_name">Last Name</label> <br>
+    <input name="input-last_name" type="text" id="input-last_name" class="form-control table-entry-input"> <br>
+
+    <label for="input-email" id="lbl-input-email">Email</label> <br>
+    <input name="input-email" type="text" id="input-email" class="form-control table-entry-input"> <br>
+
+    <label for="input-password" id="lbl-input-password">Password</label> <br>
+    <input name="input-password" type="text" id="input-password" class="form-control table-entry-input"> <br>
+
+    <label for="input-phone_number" id="lbl-input-phone_number">Phone Number</label> <br>
+    <input name="input-phone_number" type="text" id="input-phone_number" class="form-control table-entry-input"> <br>
+
+    <label for="input-hire_date" id="lbl-input-hire_date">Hire Date</label> <br>
+    <input name="input-hire_date" type="date" id="input-hire_date" class="form-control table-entry-input"> <br>
+
+    <label for="input-job_id"> Job </label><br>
+    <select class="table-entry-input foreign-data-selection"  data-column-id="job_id" name="input-job_id" id="input-job_id">
+    </select><br>
+    
+    <label for="input-salary" id="lbl-input-salary"> Salary </label> <br>
+    <input name="input-salary" type="text" id="input-salary" class="form-control table-entry-input"> <br>
+
+    <label for="input-commission_pct" id="lbl-input-commission_pct"> Commision PCT </label> <br>
+    <input name="input-commission_pct" type="text" id="input-commission_pct" class="form-control table-entry-input"> <br>
+    
+    <label for="input-department_id"> Department </label><br>
+    <select class="table-entry-input foreign-data-selection" data-column-id="manager_id" name="input-department_id" id="input-department_id">
+      <!-- Content generated from changing values from the database -->
+    </select><br>
+
+
+    <label for="input-manager_id"> Manager </label><br>
+    <select class="table-entry-input foreign-data-selection" data-column-id="manager_id" name="input-manager_id" id="input-manager_id">
+      <!-- Content generated from changing values from the database -->
+    </select><br>
+
+  </div>
+
+  <button onclick="registerUserData();" id="registerButton">Register User</button>
+
+  <div id="test"></div>
+</body>
+</html>
