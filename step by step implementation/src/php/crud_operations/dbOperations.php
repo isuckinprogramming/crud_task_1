@@ -38,9 +38,6 @@ function executeQueryHandleError( mysqli $conn, $sql)  {
 }
 
 
-
-
-
 // I think I should put the single database connection to be used for all the query
 
 class DataBaseOperations
@@ -63,64 +60,66 @@ class DataBaseOperations
    * @return array
    */
   static function execute_and_return_error_msg(String $sql)  {
+    $conn = null;
 
-
-  $conn = null;
-  if( !DataBaseOperations::$is_database_connection_created){
-    $conn = DataBaseOperations::create_db_connection();
+    if( !DataBaseOperations::$is_database_connection_created){
+      $conn = DataBaseOperations::create_db_connection();
+      DataBaseOperations::$is_database_connection_created = true;
     } else {
       $conn = $_SESSION['db_connection'];
     }
 
 
-  $result = $conn->query($sql);
-
-  if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-  }
-    $_SESSION['db_connection'] = $conn;
-
-  return ($result) ? 
-  [ 
-    "status" => true,
-    "result" => $result,
-    "mysqlQuery" => $sql
-  ]
-   : 
-  [
-    "status" => false,
-    "errorNo" => $conn->errno,
-    "errorMessage" => $conn->error,
-    "mysqlQuery" => $sql
-  ];
-} 
-static function is_user_logged_in()
-{
-  $is_all_parameters_set = isset($_SESSION['user_name']) && 
-  isset($_SESSION['user_password']) &&
-  isset($_SESSION['user_login_success']) && 
-  session_status() == PHP_SESSION_ACTIVE;
-
-  if( $is_all_parameters_set && $_SESSION['user_login_success'] === true){
-
-    return true;
-  }
-  return false;
-}
-
-static function convert_to_mysqli_safe_string($sql)
-{
-    
-  if (!DataBaseOperations::$is_database_connection_created) {
+    $result = $conn->query($sql);
 
     if (session_status() == PHP_SESSION_NONE) {
-      session_start();  
+      session_start();
     }
+    $_SESSION['db_connection'] = $conn;
 
-    $_SESSION['db_connection'] = DataBaseOperations::create_db_connection();
+    return ($result) ? 
+    [ 
+      "status" => true,
+      "result" => $result,
+      "mysqlQuery" => $sql
+    ]
+    : 
+    [
+      "status" => false,
+      "errorNo" => $conn->errno,
+      "errorMessage" => $conn->error,
+      "mysqlQuery" => $sql
+    ];
+  } 
+
+  static function is_user_logged_in()
+  {
+    $is_all_parameters_set = isset($_SESSION['user_name']) && 
+    isset($_SESSION['user_password']) &&
+    isset($_SESSION['user_login_success']) && 
+    session_status() == PHP_SESSION_ACTIVE;
+
+    if( $is_all_parameters_set && $_SESSION['user_login_success'] === true){
+
+      return true;
+    }
+    return false;
   }
-  $converted = mysqli_real_escape_string($_SESSION['db_connection'], $sql);  
 
-  return ($converted == "") ? false:$converted;  
-}
+  static function convert_to_mysqli_safe_string($sql)
+  {
+      
+    if ( !DataBaseOperations::$is_database_connection_created ) {
+
+      if ( session_status() == PHP_SESSION_NONE ) {
+        session_start();  
+      }
+
+      $_SESSION['db_connection'] = DataBaseOperations::create_db_connection();
+      $is_database_connection_created = true;
+    }
+    $converted = mysqli_real_escape_string($_SESSION['db_connection'], $sql);
+
+    return $converted;
+  }
 }

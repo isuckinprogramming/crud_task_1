@@ -33,7 +33,7 @@ function log_in_trial() {
       "login_status" => $_SESSION["is_login_verified"],
       
       // Should be changed, an absolute link should not be used for page navigation.
-      "next_page" => "http://localhost/it26l/lim/crud_task_1/step%20by%20step%20implementation/src/html/TableView.html"
+      // "next_page" => "http://localhost/it26l/lim/crud_task_1/step%20by%20step%20implementation/src/html/TableView.html"
     ];
 
     echo json_encode($response);

@@ -7,6 +7,7 @@ $every_employees_entry = generate_select_all_query("employees", "employee_id", "
 $every_regions_entry = generate_select_all_query("regions", "region_id","region_name");
 $every_departments_entry = generate_select_all_query("departments", "department_id","department_name");
 $every_job_entry = generate_select_all_query("jobs", "job_id", "job_title");
+
 $table_with_foreign_data = [
   "locations" => [
     "country_id" => generate_select_all_query("countries", "country_id", "CONCAT( country_name,' : ', country_id)") 
